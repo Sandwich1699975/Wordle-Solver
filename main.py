@@ -80,7 +80,8 @@ def get_score(word, assumptions):
         if isinstance(ass, str):
             if letter == ass:
                 # This has already been figured out. This letter is fine
-                score += 2
+                # NOTE this can be changed back to a 2, 1 was for testing
+                score += 1
                 continue
             else:
                 # There is no way this word is valid
@@ -162,19 +163,23 @@ def guess(game):
         print(
             f'[ {colorama.Style.BRIGHT}{i}{colorama.Style.RESET_ALL} ] {word}, {score}')
 
-    print()
-    while True:
-        pick_index = input('What word do you choose?\n> ')
-        try:
-            pick_index = int(pick_index)
-            assert pick_index >= 1 and pick_index <= len(top_5)
-        except (AssertionError, ValueError):
-            print('Plese enter a valid answer')
-            continue
-        picked_word = top_5[pick_index-1][0]
-        print(
-            f'Picked {colorama.Style.BRIGHT}{picked_word}{colorama.Style.RESET_ALL}\n')
-        break
+    if len(top_5) == 1:
+        # There is only one choice
+        return top_5[0][0]
+    else:
+        print()
+        while True:
+            pick_index = input('What word do you choose?\n> ')
+            try:
+                pick_index = int(pick_index)
+                assert pick_index >= 1 and pick_index <= len(top_5)
+            except (AssertionError, ValueError):
+                print('Plese enter a valid answer')
+                continue
+            picked_word = top_5[pick_index-1][0]
+            print(
+                f'Picked {colorama.Style.BRIGHT}{picked_word}{colorama.Style.RESET_ALL}\n')
+            break
 
     return picked_word
 

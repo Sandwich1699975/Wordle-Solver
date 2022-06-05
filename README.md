@@ -14,5 +14,6 @@ This attempt ingores a few aspects:
   - This is mostly brute force
 - Quantity of single letters
   - If you get a yellow and a grey on the same letter, the guesses are now flawed. They will exclude the yellow letter
-  - This may have been fixed, have not tested yet. Tests indicate this may be resolved
+  - This may have been fixed, have not tested yet.
+    - *Tests indicate this may be resolved*
   
