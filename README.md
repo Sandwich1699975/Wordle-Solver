@@ -12,8 +12,4 @@ This attempt ingores a few aspects:
   - This means the bot can have trouble gaining yellow letters if the board is mostly green
 - Optimisations
   - This is mostly brute force
-- Quantity of single letters
-  - If you get a yellow and a grey on the same letter, the guesses are now flawed. They will exclude the yellow letter
-  - This may have been fixed, have not tested yet.
-    - *Tests indicate this may be resolved*
-  
+- Doesn't explicity rule out the definite spots of yellow letters when you have ruled out the spots it's not in

@@ -1,22 +1,5 @@
-# Wordle Solver - Freddy Mcloughlan
-
-# This attempt ingores a few aspects:
-# - Relvance of letters in guess
-#   - Guesses gives you suggestions with rare letters like x & y, rather than priorising vowels and common letters
-#     - This is why you pick from 'top 5'
-# - Not playing on hard mode
-#   - The guesses adhere to hard mode, all previous hints must be used in next answer
-#   - This means the bot can have trouble gaining yellow letters if the board is mostly green
-# - Optimisations
-#   - This is mostly brute force
-# - Quantity of single letters
-#   - If you get a yellow and a grey on the same letter, the guesses are now flawed. They will exclude the yellow letter
-#   - This may have been fixed, have not tested yet. Tests indicate this may be resolved
-
-
 from mod import *
-import nltk
-from nltk.corpus import brown
+from pprint import pprint
 import re
 import colorama
 
@@ -75,7 +58,7 @@ def get_score(word, assumptions):
 
     Each letter: [[may be], [is not]] or when definite: "letter" -> "a"
     """
-    score = 0
+    score = 0.0
     for letter, ass in zip(word, assumptions):
         if isinstance(ass, str):
             if letter == ass:
@@ -96,36 +79,45 @@ def get_score(word, assumptions):
         # No duplicates
         score += 1
     if word[0] in POPULAR:
-        score += 1
+        # Word is commonly used
+        score += 0.5
     return [word, score]
 
 
 def guess(game):
     # Each letter: [[may be], [is not]] or when definite: "letter" -> "a"
-    asusmptions = [[set(), set()] for _ in range(5)]
+    assumptions = [[set(), set()] for _ in range(5)]
     yellows = set()
     for row in game:
         for i, (letter, symbol) in enumerate(zip(*row)):
             match symbol:
                 case 'g':
-                    asusmptions[i] = letter
+                    assumptions[i] = letter
                 case 'y':
                     # Add letter to 'may be' for all but the tile it was yellow for
                     for j in range(5):
-                        if j != i and isinstance(asusmptions[j], list):
-                            asusmptions[j][0].add(letter)
+                        # Add to yellow spots for all letters but itself, if it hasn't been marked as impossible
+                        if j != i and isinstance(assumptions[j], list) and letter not in assumptions[j][1]:
+                            assumptions[j][0].add(letter)
                     # This spot will not be the yellow letter
                     yellows.add(letter)
-                    asusmptions[i][1].add(letter)
+                    assumptions[i][1].add(letter)
+                    # This spot has now been prooved to not be the yellow letter
+                    if letter in assumptions[i][0]:
+                        assumptions[i][0].remove(letter)
                 case '-':
                     # Add the letter that is not in the word to list of [is not in word] per letter
                     if letter not in yellows:
                         for j in range(5):
-                            if isinstance(asusmptions[j], list):
-                                asusmptions[j][1].add(letter)
+                            if isinstance(assumptions[j], list):
+                                assumptions[j][1].add(letter)
                     else:
+                        # NOTE, this may not belong in the else statement?
                         # Well it's not in this spot at least
-                        asusmptions[i][1].add(letter)
+                        assumptions[i][1].add(letter)
+                        if letter in assumptions[i][0]:
+                            # This has been proved to not be here
+                            assumptions[i][0].remove(letter)
                 case _:
                     error(
                         f'Fatal error for guess, symbol = {symbol}')
@@ -137,7 +129,7 @@ def guess(game):
     with open('temp.txt', 'r') as f:
         for line in f:
             possible_amount += 1
-            word_placement = get_score(line.strip(), asusmptions)
+            word_placement = get_score(line.strip(), assumptions)
             if word_placement != -1:
                 possible.append(word_placement)
 
@@ -155,7 +147,6 @@ def guess(game):
 
     # Print top 5 answers, and get user to pick best one?
     print()
-    # TODO Need to add ntlk rank to this
     top_5 = sorted(possible, key=lambda x: x[1], reverse=True)[:5]
 
     # Get user to pick their option
@@ -163,11 +154,16 @@ def guess(game):
         print(
             f'[ {colorama.Style.BRIGHT}{i}{colorama.Style.RESET_ALL} ] {word}, {score}')
 
+    print()
+
     if len(top_5) == 1:
         # There is only one choice
         return top_5[0][0]
+    elif len(top_5) == 0:
+        error('Fatal error, no more possible guesses. Assumptions printed below')
+        pprint(assumptions)
+        exit(1)
     else:
-        print()
         while True:
             pick_index = input('What word do you choose?\n> ')
             try:
@@ -188,8 +184,8 @@ def main() -> None:
 
     print_line()
 
-    # First guess of the wordle
-    STARTING_WORD = 'adieu'
+    # First guess of the wordle. Toeas was mathematicaly the best starting word
+    STARTING_WORD = 'toeas'
     last_guess = STARTING_WORD
     # Game board, [ [word, results] ... ]
     game = [[STARTING_WORD]]
