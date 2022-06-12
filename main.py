@@ -5,13 +5,17 @@ import colorama
 
 # Constants:
 with open('popular.txt', 'r') as f:
+    # Set of all popular words
     POPULAR = set(f.read().split())
 
-# Total number of words that wordle can use as an answer. Lenght of words.txt
+# Total number of words that wordle can use as an answer = length of words.txt
 TOTAL_WORDS = 12947
 
 
-def pretty_box(game: list):
+def pretty_box(game: list) -> None:
+    """
+    Prints the `game` board
+    """
     print()
     for row in game:
         print(f'{"+---"*5}+')
@@ -35,7 +39,10 @@ def pretty_box(game: list):
     print(f'{"+---"*5}+\n')
 
 
-def check():
+def check() -> str:
+    """
+    Forces the user to enter in the correct results after entering in a word
+    """
     while True:
         results = input('Enter results:\n> ').lower().strip()
         if results == 'ggggg':
@@ -50,11 +57,13 @@ def check():
             print('Please enter valid results')
 
 
-def get_score(word, assumptions):
+def get_score(word, assumptions) -> list:
     """
     Score the word based on:
-    - Has green letter -> += 2
+    - Has green letter -> += 1
     - Has yellow letter -> += 1
+    - Is popular += 0.5
+    - No duplicate letters += 1
 
     Each letter: [[may be], [is not]] or when definite: "letter" -> "a"
     """
@@ -84,7 +93,10 @@ def get_score(word, assumptions):
     return [word, score]
 
 
-def guess(game):
+def guess(game) -> str:
+    """
+    Gives the user an educated guess on the next best word
+    """
     # Each letter: [[may be], [is not]] or when definite: "letter" -> "a"
     assumptions = [[set(), set()] for _ in range(5)]
     yellows = set()
