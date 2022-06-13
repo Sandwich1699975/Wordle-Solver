@@ -1,6 +1,6 @@
 # Wordle Solver
 
-An algoirithmic brute force solver for Wordle
+An algoirithmic brute force solver for [Wordle](https://www.nytimes.com/games/wordle/index.html)
 
 **Requires**: `Python 3.10.x`, and packages in `requirements.txt`
 
@@ -14,16 +14,16 @@ An algoirithmic brute force solver for Wordle
   git clone https://github.com/Sandwich1699975/Wordle-Solver.git
   ```
 
-1. Install packages
-
-  ```cmd
-  pip install -r requirements.txt
-  ```
-
 1. Enter directory
 
   ```cmd
   cd Wordle-Solver/
+  ```
+
+1. Install packages
+
+  ```cmd
+  pip3.10 install -r requirements.txt
   ```
 
 1. Run `main`
