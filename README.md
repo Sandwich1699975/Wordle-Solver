@@ -6,11 +6,33 @@ An algoirithmic brute force solver for Wordle
 
 ---
 
-To use in terminal:
+## Installation
 
-```cmd
-python3.10 main.py
-```
+1. Clone repo
+
+  ```cmd
+  git clone https://github.com/Sandwich1699975/Wordle-Solver.git
+  ```
+
+1. Install packages
+
+  ```cmd
+  pip install -r requirements.txt
+  ```
+
+1. Enter directory
+
+  ```cmd
+  cd Wordle-Solver/
+  ```
+
+1. Run `main`
+
+  ```cmd
+  python3.10 main.py
+  ```
+
+## Demo
 
 Example run with no color:
 
@@ -74,6 +96,8 @@ Well done.
 ```
 
 ---
+
+## Limitations
 
 This attempt ingores a few aspects:
 
