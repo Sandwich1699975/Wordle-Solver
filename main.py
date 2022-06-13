@@ -65,7 +65,7 @@ def get_score(word, assumptions) -> list:
     - Is popular += 0.5
     - No duplicate letters += 1
 
-    Each letter: [[may be], [is not]] or when definite: "letter" -> "a"
+    Assumptions -> Each letter in form of: [[may be], [is not]] or when definite: "letter" -> "a"
     """
     score = 0.0
     for letter, ass in zip(word, assumptions):

@@ -2,6 +2,79 @@
 
 An algoirithmic brute force solver for Wordle
 
+**Requires**: `Python 3.10.x`, and packages in `requirements.txt`
+
+---
+
+To use in terminal:
+
+```cmd
+python3.10 main.py
+```
+
+Example run with no color:
+
+```txt
+--------------------------------------------------------------------------------
+
+⬛️ = "-"
+🟨 = "y"
+🟩 = "g"
+          
+1 | Enter in TOEAS
+Enter results:
+> yyy--
+
++---+---+---+---+---+
+| T | O | E | A | S |
++---+---+---+---+---+
+
+Removed 80.3% of previous options  (12947 -> 2551)
+Total removed 80.3% of all options (12947 -> 2551)
+
+[ 1 ] quote, 4.0
+[ 2 ] flote, 4.0
+[ 3 ] bento, 4.0
+[ 4 ] helot, 4.0
+[ 5 ] retox, 4.0
+
+What word do you choose?
+> 1
+Picked quote
+
+2 | Enter in QUOTE
+Enter results:
+> yyg--
+
++---+---+---+---+---+
+| T | O | E | A | S |
++---+---+---+---+---+
+| Q | U | O | T | E |
++---+---+---+---+---+
+
+Removed 92.59% of previous options  (2551 -> 189)
+Total removed 98.54% of all options (12947 -> 189)
+
+[ 1 ] glout, 4.0
+[ 2 ] grout, 4.0
+[ 3 ] knout, 4.0
+[ 4 ] crout, 4.0
+[ 5 ] clout, 4.0
+
+What word do you choose?
+> 5
+Picked clout
+
+3 | Enter in CLOUT
+Enter results:
+> ggggg
+
+Well done.
+--------------------------------------------------------------------------------
+```
+
+---
+
 This attempt ingores a few aspects:
 
 - Relvance of letters in guess
