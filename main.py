@@ -211,6 +211,11 @@ def main() -> None:
 ⬛️ = "-"
 🟨 = "y"
 🟩 = "g"
+
+| Choice | Word  | Score |
+| ------ | ----- | ----- |
+| 1      | Tests | 4.5   | 
+
           ''')
 
     for i in range(5):

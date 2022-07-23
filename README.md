@@ -8,29 +8,31 @@ An algoirithmic brute force solver for [Wordle](https://www.nytimes.com/games/wo
 
 ## Installation
 
+<!-- Keep code level with +1 indentation -->
+
 1. Clone repo
 
-  ```cmd
-  git clone https://github.com/Sandwich1699975/Wordle-Solver.git
-  ```
+   ```cmd
+   git clone https://github.com/Sandwich1699975/Wordle-Solver.git
+   ```
 
 1. Enter directory
 
-  ```cmd
-  cd Wordle-Solver/
-  ```
+   ```cmd
+   cd Wordle-Solver/
+   ```
 
 1. Install packages
 
-  ```cmd
-  pip3.10 install -r requirements.txt
-  ```
+   ```cmd
+   pip3.10 install -r requirements.txt
+   ```
 
 1. Run `main`
 
-  ```cmd
-  python3.10 main.py
-  ```
+   ```cmd
+   python3.10 main.py
+   ```
 
 ## Demo
 
@@ -42,6 +44,11 @@ Example run with no color:
 ⬛️ = "-"
 🟨 = "y"
 🟩 = "g"
+
+| Choice | Word  | Score |
+| ------ | ----- | ----- |
+| 1      | Tests | 4.5   | 
+
           
 1 | Enter in TOEAS
 Enter results:
