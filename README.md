@@ -25,13 +25,13 @@ An algoirithmic brute force solver for [Wordle](https://www.nytimes.com/games/wo
 1. Install packages
 
    ```cmd
-   pip3.10 install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 
 1. Run `main`
 
    ```cmd
-   python3.10 main.py
+   python3 main.py
    ```
 
 ## Demo
