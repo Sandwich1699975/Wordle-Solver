@@ -2,7 +2,7 @@
 
 An algoirithmic brute force solver for [Wordle](https://www.nytimes.com/games/wordle/index.html)
 
-**Requires**: `Python 3.10.x`, and packages in `requirements.txt`
+**Requires**: ≥ `Python 3.10.x`, and packages in `requirements.txt`
 
 ---
 
